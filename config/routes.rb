@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   match '/stop/merchant' => 'manage#stopMerchant', :via => [:get, :post]
 
-  match '/manage/user' => 'manage#User', :via => [:get, :post]
+  match '/manage/user' => 'manage#manageUser', :via => [:get, :post]
 
   match '/review/merchant' => 'review#reviewMerchant', :via => [:get, :post]
 
@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   match '/post/rider' => 'review#postRider', :via => [:get, :post]
 
   match '/login' => 'login#create', :via => [:get, :post]
+
+  match '/logout' => 'login#destroy', :via => [:get, :post]
+
+  match '/statistic/sex' => 'statistic#statisticSex', :via => [:get, :post]
 end

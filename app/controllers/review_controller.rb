@@ -1,7 +1,7 @@
 class ReviewController < ApplicationController
   skip_before_filter :verify_authenticity_token
   def reviewMerchant
-    @merchants = Merchant.find_by_status(1)
+    @merchants = Merchant.all.where(:status => 1)
     if @merchants
       render :json => {:status => 0, :msg => 'success', :merchants => @merchants}
     else
@@ -23,7 +23,7 @@ class ReviewController < ApplicationController
   end
 
   def reviewRider
-    @riders = Rider.find_by_status(1)
+    @riders = Rider.all.where(:status => 1)
     if @riders
       render :json => {:status => 0, :msg => 'success', :riders => @riders}
     else

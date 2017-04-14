@@ -2,7 +2,7 @@ class LoginController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    admin = Admin.find_by_nick(param[:nick]).try(:authenticate, merchant_params[:password])
+    admin = Admin.find_by_nick(params[:nick]).try(:authenticate, params[:password])
     if admin
       session[:current_admin_id]  = admin.id
       render :json => {:status => 0, :msg => 'success', :data => {:admin_id => admin.id}}
