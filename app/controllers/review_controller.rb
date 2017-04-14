@@ -22,4 +22,26 @@ class ReviewController < ApplicationController
     end
   end
 
+  def reviewRider
+    @riders = Rider.find_by_status(1)
+    if @riders
+      render :json => {:status => 0, :msg => 'success', :riders => @riders}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
+
+  def postRider
+    @rider = Rider.find(params[:rider_id])
+    if @rider
+      if @rider.update_attributes(:status => 0)
+        render :json => {:status => 0, :msg => 'success'}
+      else
+        render :json => {:status => 1, :msg => 'fail'}
+      end
+    else
+      render :json => {:status => 1, :msg => 'not exists this rider'}
+    end
+  end
+
 end
