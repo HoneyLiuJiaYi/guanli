@@ -41,7 +41,15 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/config/manifest.js" afterPath="$PROJECT_DIR$/app/assets/config/manifest.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/cable.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/cable.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/login.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/login.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/manage.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/manage.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/review.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/review.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/statistic.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/statistic.coffee" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/login.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/login.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/manage.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/manage.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/review.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/review.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/statistic.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/statistic.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/channels/application_cable/channel.rb" afterPath="$PROJECT_DIR$/app/channels/application_cable/channel.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/channels/application_cable/connection.rb" afterPath="$PROJECT_DIR$/app/channels/application_cable/connection.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
@@ -50,6 +58,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/review_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/review_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/statistic_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/statistic_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/login_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/login_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/manage_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/manage_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/review_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/review_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/statistic_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/statistic_helper.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/jobs/application_job.rb" afterPath="$PROJECT_DIR$/app/jobs/application_job.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/mailers/application_mailer.rb" afterPath="$PROJECT_DIR$/app/mailers/application_mailer.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/admin.rb" afterPath="$PROJECT_DIR$/app/models/admin.rb" />
@@ -60,6 +72,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/product.rb" afterPath="$PROJECT_DIR$/app/models/product.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/rider.rb" afterPath="$PROJECT_DIR$/app/models/rider.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/role.rb" afterPath="$PROJECT_DIR$/app/models/role.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/role_authorityship.rb" afterPath="$PROJECT_DIR$/app/models/role_authorityship.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/mailer.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/mailer.html.erb" />
@@ -99,12 +112,26 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170411165311_create_authorities.rb" afterPath="$PROJECT_DIR$/db/migrate/20170411165311_create_authorities.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170411170054_create_role_authorityships.rb" afterPath="$PROJECT_DIR$/db/migrate/20170411170054_create_role_authorityships.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20170413002804_remove_admin_id_from_role.rb" afterPath="$PROJECT_DIR$/db/migrate/20170413002804_remove_admin_id_from_role.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/seeds.rb" afterPath="$PROJECT_DIR$/db/seeds.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/404.html" afterPath="$PROJECT_DIR$/public/404.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/422.html" afterPath="$PROJECT_DIR$/public/422.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/500.html" afterPath="$PROJECT_DIR$/public/500.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/robots.txt" afterPath="$PROJECT_DIR$/public/robots.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/controllers/login_controller_test.rb" afterPath="$PROJECT_DIR$/test/controllers/login_controller_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/controllers/manage_controller_test.rb" afterPath="$PROJECT_DIR$/test/controllers/manage_controller_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/controllers/review_controller_test.rb" afterPath="$PROJECT_DIR$/test/controllers/review_controller_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/controllers/statistic_controller_test.rb" afterPath="$PROJECT_DIR$/test/controllers/statistic_controller_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/fixtures/admins.yml" afterPath="$PROJECT_DIR$/test/fixtures/admins.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/fixtures/authorities.yml" afterPath="$PROJECT_DIR$/test/fixtures/authorities.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/fixtures/role_authorityships.yml" afterPath="$PROJECT_DIR$/test/fixtures/role_authorityships.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/fixtures/roles.yml" afterPath="$PROJECT_DIR$/test/fixtures/roles.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/models/admin_test.rb" afterPath="$PROJECT_DIR$/test/models/admin_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/models/authority_test.rb" afterPath="$PROJECT_DIR$/test/models/authority_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/models/role_authorityship_test.rb" afterPath="$PROJECT_DIR$/test/models/role_authorityship_test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/models/role_test.rb" afterPath="$PROJECT_DIR$/test/models/role_test.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_helper.rb" afterPath="$PROJECT_DIR$/test/test_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/use" afterPath="$PROJECT_DIR$/use" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -126,18 +153,18 @@
       <file leaf-file-name="review_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/review_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
+            <state relative-caret-position="575">
               <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manage_controller.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="manage_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/manage_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1058">
-              <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="16" />
+            <state relative-caret-position="434">
+              <caret line="62" column="46" lean-forward="false" selection-start-line="62" selection-start-column="46" selection-end-line="62" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -147,7 +174,7 @@
         <entry file="file://$PROJECT_DIR$/app/controllers/login_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="299">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="13" />
+              <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -213,7 +240,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routes.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="529">
@@ -246,13 +273,13 @@
         <option value="$PROJECT_DIR$/config/initializers/redis.rb" />
         <option value="$PROJECT_DIR$/app/models/rider.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/manage_controller.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/controllers/review_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/statistic_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/login_controller.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/manage_controller.rb" />
       </list>
     </option>
   </component>
@@ -539,12 +566,12 @@
       <workItem from="1492043335255" duration="2025000" />
       <workItem from="1492092051679" duration="5919000" />
       <workItem from="1492177644983" duration="9151000" />
-      <workItem from="1492199372579" duration="909000" />
+      <workItem from="1492199372579" duration="1193000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21315000" />
+    <option name="totallyTimeSpent" value="21599000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="0" />
@@ -930,22 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/manage_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1058">
-          <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/review_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/statistic_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -954,18 +965,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/login_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="529">
           <caret line="23" column="59" lean-forward="false" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/login_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/review_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/manage_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="62" column="46" lean-forward="false" selection-start-line="62" selection-start-column="46" selection-end-line="62" selection-end-column="46" />
           <folding />
         </state>
       </provider>

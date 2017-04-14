@@ -1,7 +1,7 @@
 class ManageController < ApplicationController
   skip_before_filter :verify_authenticity_token
   def manageMerchant
-    @merchants = Merchant.all.where(:is_delete => 0)
+    @merchants = Merchant.all
     if @merchants
       render :json => {:status => 0, :msg => 'success', :merchants => @merchants}
     else
@@ -22,8 +22,21 @@ class ManageController < ApplicationController
     end
   end
 
+  def activeMerchant
+    @merchant = Merchant.find(params[:merchant_id])
+    if @merchant
+      if @merchant.update_attributes(:is_delete => 0)
+        render :json => {:status => 0, :msg => 'success'}
+      else
+        render :json => {:status => 1, :msg => 'fail'}
+      end
+    else
+      render :json => {:status => 2, :msg => 'not this merchant'}
+    end
+  end
+
   def manageRider
-    @riders = Rider.all.where(:is_del => 0)
+    @riders = Rider.all
     if @riders
       render :json => {:status => 0, :msg => 'success', :riders => @riders}
     else
@@ -35,6 +48,19 @@ class ManageController < ApplicationController
     @rider = Rider.find(params[:rider_id])
     if @rider
       if @rider.update_attributes(:is_del => 1)
+        render :json => {:status => 0, :msg => 'success'}
+      else
+        render :json => {:status => 1, :msg => 'fail'}
+      end
+    else
+      render :json => {:status => 2, :msg => 'not this rider'}
+    end
+  end
+
+  def activeRider
+    @rider = Rider.find(params[:rider_id])
+    if @rider
+      if @rider.update_attributes(:is_del => 0)
         render :json => {:status => 0, :msg => 'success'}
       else
         render :json => {:status => 1, :msg => 'fail'}
