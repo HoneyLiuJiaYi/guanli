@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org/'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -57,3 +57,5 @@ gem 'bcrypt'
 gem 'redis'
 
 gem 'rack-cors', :require => 'rack/cors'
+
+gem 'qiniu', '~> 6.8.1'

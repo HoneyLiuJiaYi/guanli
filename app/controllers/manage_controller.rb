@@ -78,4 +78,34 @@ class ManageController < ApplicationController
       render :json => {:status => 1, :msg => 'fail'}
     end
   end
+
+  def showAdmin
+    @admins = Admin.all.where(:is_del => 0)
+    if @admins
+      render :json => {:status => 0, :msg => 'success', :data => @admins}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
+
+  def addAdmin
+    @admin = Admin.new
+    @admin.nick = params[:nick]
+    @admin.password = params[:password]
+    @admin.role_id = params[:role_id]
+    if @admin.save
+      render :json => {:status => 0, :msg => 'success'}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
+
+  def removeAdmin
+    @admin = Admin.find(params[:admin_id])
+    if @admin.update_attributes(:is_del => 1)
+      render :json => {:status => 0, :msg => 'success'}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
 end
