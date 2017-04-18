@@ -7,13 +7,13 @@ class CategoryController < ApplicationController
       uploaded_io = params[:logo]
       Image.upload(params[:logo].tempfile.path, uploaded_io.original_filename)
       @logo = 'http://oo8xw7yv4.bkt.clouddn.com/' + uploaded_io.original_filename
-      if category.update_attributes(:name => params[:name], :logo => @logo)
+      if @category.update_attributes(:name => params[:name], :logo => @logo)
         render :json => {:status => 0, :msg => 'success'}
       else
         render :json => {:status => 1, :msg => 'fail'}
       end
     else
-      if category.update_attributes(:name => params[:name])
+      if @category.update_attributes(:name => params[:name])
         render :json => {:status => 0, :msg => 'success'}
       else
         render :json => {:status => 1, :msg => 'fail'}
@@ -22,7 +22,7 @@ class CategoryController < ApplicationController
   end
 
   def list
-    @categories = Category.all
+    @categories = Category.all.where(:is_delete => 0)
     if @categories
       render :json => {:status => 0, :msg => 'success', :data => {:categories => @categories}}
     else
@@ -37,6 +37,7 @@ class CategoryController < ApplicationController
       if @count > 0
         render :json => {:status => 1, :msg => '该品类下还有商品，不能删除'}
       else
+        @category.update_attributes(:is_delete => 1)
         render :json => {:status => 0, :msg => 'success'}
       end
     else

@@ -21,7 +21,7 @@ class ProductController < ApplicationController
   end
 
   def list
-    @products = Category.find(params[:category_id]).products
+    @products = Category.find(params[:category_id]).products.where(:is_delete => 0)
     if @products
       render :json => {:status => 0, :msg => 'success', :data => {:products => @products}}
     else
@@ -47,6 +47,7 @@ class ProductController < ApplicationController
     @product = Product.new
     @product.name = params[:name]
     @product.price = params[:price]
+    @product.category = @category
     if params[:logo]
       uploaded_io = params[:logo]
       @product.logo = 'http://oo8xw7yv4.bkt.clouddn.com/' + uploaded_io.original_filename
