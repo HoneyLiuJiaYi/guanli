@@ -27,11 +27,11 @@ Rails.application.routes.draw do
 
   match '/logout' => 'login#destroy', :via => [:get, :post]
 
-  match '/show/admin' => 'manage#showAdmin', :via => [:get, :post]
+  match '/show/admin' => 'addmin#showAdmin', :via => [:get, :post]
 
-  match '/add/admin' => 'manage#addAdmin', :via => [:get, :post]
+  match '/add/admin' => 'addmin#addAdmin', :via => [:get, :post]
 
-  match '/remove/admin' => 'manage#removeAdmin', :via => [:get, :post]
+  match '/remove/admin' => 'addmin#removeAdmin', :via => [:get, :post]
 
   match '/statistic/sex' => 'statistic#statisticSex', :via => [:get, :post]
 
@@ -59,4 +59,21 @@ Rails.application.routes.draw do
 
   match '/category/edit' => 'category#edit', :via => [:get, :post]
 
+  #spring1 round2
+
+  match '/admin/show/station' => 'admin#showAdminStation', :via => [:get, :post]
+
+  match '/admin/show/region' => 'admin#showAdminRegion', :via => [:get, :post]
+
+  match '/admin/destroy/station' => 'admin#destroyAdminStation', :via => [:get, :post]
+
+  match '/region/all' => 'station#getAllRegions', :via => [:get, :post]
+
+  match '/station/create' => 'station#createStation', :via => [:get, :post]
+
+  match '/rider/show' => 'rider#showRider', :via => [:get, :post]
+
+  match '/rider/bind' => 'rider#bindRider', :via => [:get, :post]
+
+  match '/rider/unbindRider' => 'rider#unbindRider', :via => [:get, :post]
 end
