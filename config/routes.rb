@@ -27,11 +27,11 @@ Rails.application.routes.draw do
 
   match '/logout' => 'login#destroy', :via => [:get, :post]
 
-  match '/show/admin' => 'addmin#showAdmin', :via => [:get, :post]
+  match '/show/admin' => 'admin#showAdmin', :via => [:get, :post]
 
-  match '/add/admin' => 'addmin#addAdmin', :via => [:get, :post]
+  match '/add/admin' => 'admin#addAdmin', :via => [:get, :post]
 
-  match '/remove/admin' => 'addmin#removeAdmin', :via => [:get, :post]
+  match '/remove/admin' => 'admin#removeAdmin', :via => [:get, :post]
 
   match '/statistic/sex' => 'statistic#statisticSex', :via => [:get, :post]
 
@@ -61,19 +61,40 @@ Rails.application.routes.draw do
 
   #spring1 round2
 
-  match '/admin/show/station' => 'admin#showAdminStation', :via => [:get, :post]
+  match '/station/show' => 'station#showAdminStation', :via => [:get, :post]
 
-  match '/admin/show/region' => 'admin#showAdminRegion', :via => [:get, :post]
+  match '/region/show' => 'region#showAdminRegion', :via => [:get, :post]
 
-  match '/admin/destroy/station' => 'admin#destroyAdminStation', :via => [:get, :post]
+  match '/station/destroy' => 'station#destroyAdminStation', :via => [:get, :post]
 
-  match '/region/all' => 'station#getAllRegions', :via => [:get, :post]
+  match '/region/all' => 'region#getAllRegions', :via => [:get, :post]
 
   match '/station/create' => 'station#createStation', :via => [:get, :post]
 
+  match '/function' => 'function#allFuntion', :via => [:get, :post]
+
+  match '/station/all' => 'station#showAllStation', :via => [:get, :post]
+
+  #骑手
   match '/rider/show' => 'rider#showRider', :via => [:get, :post]
 
   match '/rider/bind' => 'rider#bindRider', :via => [:get, :post]
 
   match '/rider/unbindRider' => 'rider#unbindRider', :via => [:get, :post]
+
+  match '/rider/station' => 'rider#stationRider', :via => [:get, :post]
+
+  match '/rider/unstation' => 'rider#unstation', :via => [:get, :post]
+
+  #商户
+  match '/merchant/station' => 'merchant#stationMerchant', :via => [:get, :post]
+
+  match '/merchant/bind' => 'merchant#bindMerchant', :via => [:get, :post]
+
+  match '/merchant/unbind' => 'merchant#unbindMerchant', :via => [:get, :post]
+
+  match '/merchant/unstation' => 'merchant#unstation', :via => [:get, :post]
+
+  #statistic
+  match '/region/statistic' => 'statistic#statisticRegion', :via => [:get, :post]
 end

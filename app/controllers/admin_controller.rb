@@ -14,7 +14,7 @@ class AdminController < ApplicationController
   end
 
   def showAdmin
-    @admins = Admin.all.where(:is_del => 0)
+    @admins = Admin.where(:is_del => 0).order(:id => 'desc')
     if @admins
       render :json => {:status => 0, :msg => 'success', :data => @admins}
     else
@@ -27,51 +27,18 @@ class AdminController < ApplicationController
     @admin.nick = params[:nick]
     @admin.password = params[:password]
     @admin.role_id = params[:role_id]
-    @region = Region.find(params[:region_id])
+    @region = Region.find_by_name(params[:region_name])
     @admin.region = @region
     if @admin.save
       render :json => {:status => 0, :msg => 'success'}
     else
-      render :json => {:status => 1, :msg => 'fail'}
+      render :json => {:status => 1, :msg => @region}
     end
   end
 
   def removeAdmin
     @admin = Admin.find(params[:admin_id])
     if @admin.update_attributes(:is_del => 1)
-      render :json => {:status => 0, :msg => 'success'}
-    else
-      render :json => {:status => 1, :msg => 'fail'}
-    end
-  end
-
-  def showAdminStation
-    @admin = Admin.find(params[:admin_id])
-    @region = Region.find(@admin.region_id)
-    @stations = Station.find_by_region_id(@region.id)
-    if @stations
-      render :json => {:status => 0, :msg => 'success', :data => {:stations => @stations}}
-    else
-      render :json => {:status => 1, :msg => 'fail'}
-    end
-  end
-
-  def showAdminRegion
-    @admin = Admin.find(params[:admin_id])
-    @region = Region.find(@admin.region_id)
-    if @region
-      render :json => {:status => 0, :msg => 'success', :data => {:region => @region}}
-    else
-      render :json => {:status => 1, :msg => 'fail'}
-    end
-  end
-
-  def destroyAdminStation
-    @station = Station.find(params[:station_id])
-    if @station
-      @address = Address.find(@station.address_id)
-      @address.destroy
-      @station.destroy
       render :json => {:status => 0, :msg => 'success'}
     else
       render :json => {:status => 1, :msg => 'fail'}

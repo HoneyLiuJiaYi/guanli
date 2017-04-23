@@ -59,3 +59,5 @@ gem 'redis'
 gem 'rack-cors', :require => 'rack/cors'
 
 gem 'qiniu', '~> 6.8.1'
+
+gem 'ransack', github: 'activerecord-hackery/ransack'

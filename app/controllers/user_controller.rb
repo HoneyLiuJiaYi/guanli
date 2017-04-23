@@ -34,4 +34,19 @@ class UserController < ApplicationController
       render :json => {:status => 1, :msg => 'not the user'}
     end
   end
+
+  def addAddress
+    if params[:lat] == null || params[:lng] == null
+      render :json => {:status => 1, :msg => '经纬度错误'}
+    else
+      @address = Address.new(:lat => params[:lat], :lng => params[:lng], :comment => params[:comment])
+      if @address.save
+        @user = User.find(params[:user_id])
+        UserAdddressship.create(:user => @user, :address => @address)
+        render :json => {:status => 0, :msg => 'success'}
+      else
+        render :json => {:status => 1, :msg => '保存失败'}
+      end
+    end
+  end
 end

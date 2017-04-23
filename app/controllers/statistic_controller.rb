@@ -9,4 +9,19 @@ class StatisticController < ApplicationController
       render :json => {:status => 1, :msg => 'fail', :data => {}}
     end
   end
+
+  def statisticRegion
+    @regions = Region.where(:level => 1)
+    if @regions
+      @arr = []
+      @regions.each do |region|
+        @count = Station.where(:region_id => region.id).count
+        h = Hash[:region => region, :count => @count]
+        @arr << h
+      end
+      render :json => {:status => 0, :msg => 'success', :data => {:statistic => @arr}}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
 end

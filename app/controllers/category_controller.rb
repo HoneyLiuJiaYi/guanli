@@ -22,7 +22,11 @@ class CategoryController < ApplicationController
   end
 
   def list
-    @categories = Category.all.where(:is_delete => 0)
+    if params[:query]
+      @categories = Category.where(:is_delete => 0).ransack(:name_cont => params[:query])
+    else
+      @categories = Category.where(:is_delete => 0)
+    end
     if @categories
       render :json => {:status => 0, :msg => 'success', :data => {:categories => @categories}}
     else

@@ -21,7 +21,11 @@ class ProductController < ApplicationController
   end
 
   def list
-    @products = Category.find(params[:category_id]).products.where(:is_delete => 0)
+    if params[:query]
+      @products = Category.find(params[:category_id]).products.where(:is_delete => 0).ransack(:name_cont => params[:query])
+    else
+      @products = Category.find(params[:category_id]).products.where(:is_delete => 0)
+    end
     if @products
       render :json => {:status => 0, :msg => 'success', :data => {:products => @products}}
     else
