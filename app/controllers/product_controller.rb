@@ -50,7 +50,6 @@ class ProductController < ApplicationController
     @category = Category.find(params[:category_id])
     @product = Product.new
     @product.name = params[:name]
-    @product.price = params[:price]
     @product.category = @category
     if params[:logo]
       uploaded_io = params[:logo]
@@ -71,4 +70,37 @@ class ProductController < ApplicationController
       end
     end
   end
+
+  def showProductPrice
+    @product = Product.find(params[:product_id])
+    @ps = MerchantProductship.where(:product_id => params[:product_id])
+    @count = 0
+    @num = 0
+    @ps.each do |p|
+      @count = @count + p.price
+      @num = @num + 1
+    end
+    if @count != 0
+      @count = @count/@num
+      render :json => {:status => 0, :msg => 'success', :data => {:count => @count, :product => @product}}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
+
+  def addProductPrice
+    if params[:price1] && params[:price2] && params[:price3] && params[:price4] && params[:price5] && params[:price6]
+      @product = Product.find(params[:product_id])
+      @product.update_attributes(:price1 => params[:price1])
+      @product.update_attributes(:price2 => params[:price2])
+      @product.update_attributes(:price3 => params[:price3])
+      @product.update_attributes(:price4 => params[:price4])
+      @product.update_attributes(:price5 => params[:price5])
+      @product.update_attributes(:price6 => params[:price6])
+      render :json => {:status => 0, :msg => 'success'}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
+
 end

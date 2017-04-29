@@ -38,21 +38,23 @@ class MerchantController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @all = Station.where(:is_del => 0)
     @stations = @merchant.stations.where(:is_del => 0)
-    if @merchant && @all
-      @arr = []
-      @all.each do |sta|
-        @a = 0
-        @stations.each do |ss|
-          if ss.id == sta.id
-            @a = 1
-            break
-          end
-        end
-        if @a == 0
-          @arr << sta
-        end
-      end
-      render :json => {:status => 0, :msg => 'success', :data => {:stations => @arr}}
+    if@stations
+      # @arr = []
+      # @all.each do |sta|
+      #   @a = 0
+      #   @stations.each do |ss|
+      #     if ss.id == sta.id
+      #       @a = 1
+      #       break
+      #     end
+      #   end
+      #   if @a == 0
+      #     @arr << sta
+      #   end
+      # end
+      render :json => {:status => 0, :msg => 'success', :data => {:stations => @stations}}
+    elsif @stations == null
+      render :json => {:status => 0, :msg => 'success', :data => {:stations => Station.all}}
     else
       render :json => {:status => 1, :msg => 'fail'}
     end

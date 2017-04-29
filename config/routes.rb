@@ -97,4 +97,9 @@ Rails.application.routes.draw do
 
   #statistic
   match '/region/statistic' => 'statistic#statisticRegion', :via => [:get, :post]
+
+  #sprint 1 2
+  match '/product/price/show' => 'product#showProductPrice', :via => [:get, :post]
+
+  match '/product/price/add' => 'product#addProductPrice', :via => [:get, :post]
 end
