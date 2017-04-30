@@ -39,13 +39,6 @@ ActiveRecord::Schema.define(version: 20170425150652) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "category_priceships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "category_id"
-    t.integer  "price_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name",                    collation: "utf8_general_ci"
     t.string   "index"
@@ -66,9 +59,9 @@ ActiveRecord::Schema.define(version: 20170425150652) do
   create_table "merchant_productships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "merchant_id"
     t.integer  "product_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.decimal  "price",       precision: 10
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.decimal  "price",       precision: 10, scale: 6
   end
 
   create_table "merchant_stationships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -112,18 +105,18 @@ ActiveRecord::Schema.define(version: 20170425150652) do
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "name",                                                collation: "utf8_general_ci"
+    t.string   "name",                                                          collation: "utf8_general_ci"
     t.string   "logo"
-    t.integer  "is_delete",                  default: 0, null: false
+    t.integer  "is_delete",                            default: 0, null: false
     t.integer  "category_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.decimal  "price1",      precision: 10
-    t.decimal  "price2",      precision: 10
-    t.decimal  "price3",      precision: 10
-    t.decimal  "price4",      precision: 10
-    t.decimal  "price5",      precision: 10
-    t.decimal  "price6",      precision: 10
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.decimal  "price1",      precision: 10, scale: 6
+    t.decimal  "price2",      precision: 10, scale: 6
+    t.decimal  "price3",      precision: 10, scale: 6
+    t.decimal  "price4",      precision: 10, scale: 6
+    t.decimal  "price5",      precision: 10, scale: 6
+    t.decimal  "price6",      precision: 10, scale: 6
   end
 
   create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

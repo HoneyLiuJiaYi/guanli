@@ -12,7 +12,7 @@ class RiderController < ApplicationController
   end
 
   def showRider
-    if params[:region_id] == 0
+    if params[:region_id] == nil
       @riders = Rider.all
       render :json => {:status => 0, :msg => 'success', :data => {:riders => @riders}}
     else
@@ -36,9 +36,15 @@ class RiderController < ApplicationController
       @stations = @rider.stations.where(:is_del => 0)
       @arr = []
       @stations.each do |station|
-        @arr << Address.find(station.address_id)
+        h = Hash.new
+        h[:station_id] = station.id
+        h[:station_name] = station.name
+        @addr = Address.find(station.address_id)
+        h[:address_lat] = @addr.lat
+        h[:address_lng] = @addr.lng
+        @arr << h
       end
-      render :json => {:status => 0, :msg => 'success', :data => {:stations => @stations, :addresses => @arr}}
+      render :json => {:status => 0, :msg => 'success', :data => {:stations => @arr}}
     else
       render :json => {:status => 1, :msg => 'fail'}
     end
@@ -59,7 +65,13 @@ class RiderController < ApplicationController
           end
         end
         if @a == 0
-          @arr << sta
+          h = Hash.new
+          @addr = Address.find(sta.address_id)
+          h[:station_id] = sta.id
+          h[:station_name] = sta.name
+          h[:address_lat] = @addr.lat
+          h[:address_lng] = @addr.lng
+          @arr << h
         end
       end
       render :json => {:status => 0, :msg => 'success', :data => {:stations => @arr}}

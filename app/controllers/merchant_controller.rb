@@ -6,9 +6,15 @@ class MerchantController < ApplicationController
       @stations = @merchant.stations.where(:is_del => 0)
       @arr = []
       @stations.each do |station|
-        @arr << Address.find(station.address_id)
+        h = Hash.new
+        h[:id] = station.id
+        h[:name] = station.name
+        @addr = Address.find(station.address_id)
+        h[:lat] = @addr.lat
+        h[:lng] = @addr.lng
+        @arr << h
       end
-      render :json => {:status => 0, :msg => 'success', :data => {:stations => @stations, :addresses => @arr}}
+      render :json => {:status => 0, :msg => 'success', :data => {:stations => @arr}}
     else
       render :json => {:status => 1, :msg => 'fail'}
     end
@@ -38,23 +44,27 @@ class MerchantController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @all = Station.where(:is_del => 0)
     @stations = @merchant.stations.where(:is_del => 0)
-    if@stations
-      # @arr = []
-      # @all.each do |sta|
-      #   @a = 0
-      #   @stations.each do |ss|
-      #     if ss.id == sta.id
-      #       @a = 1
-      #       break
-      #     end
-      #   end
-      #   if @a == 0
-      #     @arr << sta
-      #   end
-      # end
-      render :json => {:status => 0, :msg => 'success', :data => {:stations => @stations}}
-    elsif @stations == null
-      render :json => {:status => 0, :msg => 'success', :data => {:stations => Station.all}}
+    if @all && @stations
+      @arr = []
+      @all.each do |sta|
+        @flag = 0
+        @stations.each do |ss|
+          if ss.id == sta.id
+            @flag = 1
+            break
+          end
+        end
+        if @flag == 0
+          h = Hash.new
+          @addr = Address.find(sta.address_id)
+          h[:id] = sta.id
+          h[:name] = sta.name
+          h[:lat] = @addr.lat
+          h[:lng] = @addr.lng
+          @arr << h
+        end
+      end
+      render :json => {:status => 0, :msg => 'success', :data => {:stations => @arr}}
     else
       render :json => {:status => 1, :msg => 'fail'}
     end
