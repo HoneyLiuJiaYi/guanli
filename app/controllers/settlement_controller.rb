@@ -2,9 +2,11 @@ class SettlementController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def getSettlement
-      @orders = Order.all
-      @price = 0
-      @arr = []
+    @orders = Order.all
+    @price = 0
+    @arr = []
+    File.open(Rails.root + "download/text", "wb") do |file|
+      file.write("ID\t价格\t产品\t品类\t创建时间\n")
       @orders.each do |order|
         if params[:data_from] && order.created_at >= params[:data_from]
           h = Hash.new
@@ -25,9 +27,15 @@ class SettlementController < ApplicationController
           h[:product] = @product.name
           h[:category] = @product.category.name
           h[:time] = order.created_at
+          file.write("  #{h[:id]}\t#{h[:price]}\t#{h[:product]}\t#{h[:category]}\t#{h[:time]}\n")
           @arr << h
         end
       end
-      render :json => {:status => 0, :msg => 'success', :data => {:settlement => @arr}}
+    end
+    render :json => {:status => 0, :msg => 'success', :data => {:settlement => @arr}}
+  end
+
+  def download
+    send_file(File.join(Rails.root + "download/text"))
   end
 end
