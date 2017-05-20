@@ -24,4 +24,13 @@ class StatisticController < ApplicationController
       render :json => {:status => 1, :msg => 'fail'}
     end
   end
+
+  def logs
+    @logs = Log.all
+    if @logs
+      render :json => {:status => 0, :msg => 'success', :data => {:logs => @logs}}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
 end

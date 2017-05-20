@@ -102,4 +102,26 @@ Rails.application.routes.draw do
   match '/product/price/show' => 'product#showProductPrice', :via => [:get, :post]
 
   match '/product/price/add' => 'product#addProductPrice', :via => [:get, :post]
+
+  #sprint 2 1
+  match '/coupon/create' => 'coupon#create', :via => [:get, :post]
+
+  match '/coupon/show' => 'coupon#show', :via => [:get, :post]
+
+  match '/user/card' => 'user#card', :via => [:get, :post]
+
+  match '/user/input/money' => 'user#inputMoney', :via => [:get, :post]
+
+  match '/logs' => 'statistic#logs', :via => [:get, :post]
+
+  match '/coupon/user' => 'coupon#userCoupon', :via => [:get, :post]
+
+  match '/coupon/not' => 'coupon#notUserCoupon', :via => [:get, :post]
+
+  match '/coupon/catch' => 'coupon#catch', :via => [:get, :post]
+
+  match '/coupon/user/delete' => 'coupon#userDelete', :via => [:get, :post]
+
+  #sprint 2 2
+  match '/settlement/get' => 'settlement#getSettlement', :via => [:get, :post]
 end
