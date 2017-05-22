@@ -8,31 +8,43 @@ class SettlementController < ApplicationController
     File.open(Rails.root + "download/text", "wb") do |file|
       file.write("ID\t价格\t产品\t品类\t创建时间\n")
       @orders.each do |order|
-        if params[:data_from] && order.created_at >= params[:data_from]
-          h = Hash.new
-          @price = @price + order.price
-          @product = Product.find(order.product_id)
-          h[:id] = order.id
-          h[:price] = order.price
-          h[:product] = @product.name
-          h[:category] = @product.category.name
-          h[:time] = order.created_at
-          @arr << h
-        elsif params[:data_from] == nil
-          h = Hash.new
-          @price = @price + order.price
-          @product = Product.find(order.product_id)
-          h[:id] = order.id
-          h[:price] = order.price
-          h[:product] = @product.name
-          h[:category] = @product.category.name
-          h[:time] = order.created_at
-          file.write("  #{h[:id]}\t#{h[:price]}\t#{h[:product]}\t#{h[:category]}\t#{h[:time]}\n")
-          @arr << h
+        if params[:data_from] && order.created_at < params[:data_from]
+          next
         end
+        h = Hash.new
+          @product = Product.find(order.product_id)
+          h[:id] = order.id
+        h[:price] = order.price
+        h[:product] = @product.name
+        h[:category] = @product.category.name
+        h[:time] = order.created_at
+        @arr << h
+        h = Hash.new
+        @product = Product.find(order.product_id)
+        h[:id] = order.id
+        h[:rider_price] = order.price * 0.1
+        h[:merchant_price] = order.merchant_price
+        h[:operation_price] = order.price - order.discount - order.merchant_price - order.price * 0.1
+        @price = @price + order.price - order.discount - order.merchant_price - order.price * 0.1
+        h[:product] = @product.name
+        h[:category] = @product.category.name
+        h[:time] = order.created_at
+        h[:withdraw] = order.withdraw
+        file.write("  #{h[:id]}\t#{h[:price]}\t#{h[:product]}\t#{h[:category]}\t#{h[:time]}\n")
+          @arr << h
       end
     end
-    render :json => {:status => 0, :msg => 'success', :data => {:settlement => @arr}}
+    render :json => {:status => 0, :msg => 'success', :data => {:price => @price, :settlement => @arr}}
+  end
+
+  def withdraw
+    @orders = Order.where(:withdraw => 1)
+    @price = 0
+    @orders.each do |order|
+      @price = @price + (order.price - order.discount - order.merchant_price - order.price * 0.1)
+      order.update_attribute(:withdraw, 0)
+    end
+    render :json => {:status => 0, :msg => 'success', :data => {:price => @price}}
   end
 
   def download

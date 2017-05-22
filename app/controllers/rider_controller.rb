@@ -1,5 +1,6 @@
 class RiderController < ApplicationController
   skip_before_filter :verify_authenticity_token
+
   def bindRider
     @rider = Rider.find(params[:rider_id])
     @station = Station.find(params[:station_id])

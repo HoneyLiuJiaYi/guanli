@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514052356) do
+ActiveRecord::Schema.define(version: 20170522141627) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name",                                             collation: "utf8_general_ci"
@@ -56,13 +56,6 @@ ActiveRecord::Schema.define(version: 20170514052356) do
     t.datetime "updated_at",                            null: false
   end
 
-  create_table "functions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "name",                    collation: "utf8_general_ci"
-    t.string   "index"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.decimal  "price",      precision: 10
     t.integer  "amount"
@@ -77,19 +70,21 @@ ActiveRecord::Schema.define(version: 20170514052356) do
     t.integer  "user_card_id"
     t.decimal  "real_money",   precision: 10
     t.decimal  "fake_money",   precision: 10
-    t.string   "method",                                   collation: "utf8_general_ci"
+    t.string   "method",                                                collation: "utf8_general_ci"
     t.integer  "status"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "order_id",                    default: -1, null: false
   end
 
   create_table "merchant_incomes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "merchant_id"
-    t.decimal  "price",       precision: 10
-    t.decimal  "discount",    precision: 10
+    t.decimal  "price",         precision: 10
+    t.decimal  "discount",      precision: 10
     t.integer  "order_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "is_settlement",                default: 1, null: false
   end
 
   create_table "merchant_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -142,16 +137,18 @@ ActiveRecord::Schema.define(version: 20170514052356) do
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "user_id",                                              collation: "latin1_swedish_ci"
-    t.string   "address_id",                                           collation: "latin1_swedish_ci"
-    t.decimal  "price",        precision: 10
-    t.integer  "status",                      default: 0, null: false
-    t.integer  "is_del",                      default: 0, null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.string   "product_id",                              null: false
+    t.string   "user_id",                                                          collation: "latin1_swedish_ci"
+    t.string   "address_id",                                                       collation: "latin1_swedish_ci"
+    t.decimal  "price",          precision: 10
+    t.integer  "status",                                  default: 0, null: false
+    t.integer  "is_del",                                  default: 0, null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.string   "product_id",                                          null: false
     t.integer  "product_nums"
-    t.decimal  "discount",     precision: 10, default: 0, null: false
+    t.decimal  "discount",       precision: 10,           default: 0, null: false
+    t.decimal  "merchant_price", precision: 10, scale: 6
+    t.integer  "withdraw",                                default: 1, null: false
   end
 
   create_table "orderstations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -213,12 +210,27 @@ ActiveRecord::Schema.define(version: 20170514052356) do
     t.integer  "region_id"
   end
 
+  create_table "role_serviceships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "rid"
+    t.integer  "sid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "nick"
     t.integer  "is_del",                   default: 0, null: false
     t.text     "comment",    limit: 65535,             null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+  end
+
+  create_table "services", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "function"
+    t.integer  "pid"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

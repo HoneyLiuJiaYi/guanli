@@ -126,4 +126,16 @@ Rails.application.routes.draw do
   match '/settlement/get' => 'settlement#getSettlement', :via => [:get, :post]
 
   match '/download' => 'settlement#download', :via => [:get, :post]
+
+  #final
+  match '/withdraw' => 'settlement#withdraw', :via => [:get, :post]
+
+  match '/role/list' => 'role#roleList', :via => [:get, :post]
+
+  match '/role/service' => 'role#roleService', :via => [:get, :post]
+
+  match '/role/not' => 'role#notService', :via => [:get, :post]
+
+  match '/role/add' => 'role#addService', :via => [:get, :post]
+
 end
