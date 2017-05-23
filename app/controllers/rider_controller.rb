@@ -13,12 +13,15 @@ class RiderController < ApplicationController
   end
 
   def showRider
-    if params[:region_id] == nil
-      @riders = Rider.all
+    if params[:region_id]
+      if params[:region_id] == 1
+        @riders = Rider.all
+      else
+        @riders = Rider.where(:region_id => params[:region_id])
+      end
       render :json => {:status => 0, :msg => 'success', :data => {:riders => @riders}}
     else
-      @riders = Rider.find_by_region_id(params[:region_id])
-      render :json => {:status => 0, :msg => 'success', :data => {:riders => @riders}}
+      render :json => {:status => 1, :msg => 'fail'}
     end
   end
 
