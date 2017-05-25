@@ -1,9 +1,10 @@
 class AdvertisementController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
   def addAd
     if params[:product_id] && params[:logo]
       @ad = Advertisement.new
-      upload_io = params[:logo]
+      uploaded_io = params[:logo]
       Image.upload(params[:logo].tempfile.path, uploaded_io.original_filename)
       @ad.ad_logo = 'http://oo8xw7yv4.bkt.clouddn.com/' + uploaded_io.original_filename
       @ad.product_id = params[:product_id]
@@ -35,14 +36,14 @@ class AdvertisementController < ApplicationController
         @vis = []
         flag = 0
         @ps.each do |p|
-          @ad = Product.find(p).advertisements.first
+          @ad = Product.find(p.product_id).advertisements.first
           @total << @ad
           @vis[@ad.id] = 1
           flag = flag + 1
         end
         @adver = Advertisement.all
         @adver.each do |adver|
-          if vis[adver.id] = 1
+          if @vis[adver.id] == 1
             next
           end
           @vis[adver.id] = 1
@@ -59,7 +60,7 @@ class AdvertisementController < ApplicationController
         end
       else
         @ps.each do |p|
-          @ad = Product.find(p).advertisements.first
+          @ad = Product.find(p.product_id).advertisements.first
           @total << @ad
         end
       end
