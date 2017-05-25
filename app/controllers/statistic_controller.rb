@@ -27,11 +27,14 @@ class StatisticController < ApplicationController
   end
 
   def logs
-    @logs = Log.all
+    start = (params[:page].to_i - 1) * 5
+    @logs = Log.find_by_sql("select * from logs limit #{start},6")
+    @count = Log.count/6 + Log.count%6
     if @logs
-      render :json => {:status => 0, :msg => 'success', :data => {:logs => @logs}}
+      render :json => {:status => 0, :msg => 'success', :data => {:logs => @logs, :count => @count, :page => params[:page]}}
     else
       render :json => {:status => 1, :msg => 'fail'}
     end
   end
+
 end

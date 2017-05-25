@@ -22,6 +22,15 @@ class AdminController < ApplicationController
     end
   end
 
+  def singleAdmin
+    if params[:admin_id]
+      @admin = Admin.find(params[:admin_id])
+      render :json => {:status => 0, :msg => 'success', :data => @admin}
+    else
+      render :json => {:status => 1, :msg => '参数错误'}
+    end
+  end
+
   def addAdmin
     @admin = Admin.new
     @admin.nick = params[:nick]

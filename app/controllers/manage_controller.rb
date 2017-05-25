@@ -47,7 +47,7 @@ class ManageController < ApplicationController
   def stopRider
     @rider = Rider.find(params[:rider_id])
     if @rider
-      if @rider.update_attributes(:is_del => 1)
+      if @rider.update_attribute(:is_del,1)
         render :json => {:status => 0, :msg => 'success'}
       else
         render :json => {:status => 1, :msg => 'fail'}
@@ -60,7 +60,7 @@ class ManageController < ApplicationController
   def activeRider
     @rider = Rider.find(params[:rider_id])
     if @rider
-      if @rider.update_attributes(:is_del => 0)
+      if @rider.update_attribute(:is_del,0)
         render :json => {:status => 0, :msg => 'success'}
       else
         render :json => {:status => 1, :msg => 'fail'}

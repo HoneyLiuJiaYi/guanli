@@ -40,19 +40,24 @@ class StationController < ApplicationController
   end
 
   def showAllStation
-    if params[:query]
-      @stations = Station.where(:status => 0).where(:is_del => 0).ransack(:name_cont => params[:query]).order(:id => 'desc')
-    else
-      @stations = Station.where(:status => 0).where(:is_del => 0).order(:id => 'desc')
-    end
-    if @stations
-      @arr = []
-      @stations.each do |station|
-        @arr << Address.find(station.address_id)
+    if params[:region_id]
+      if params[:region_id].to_i == 1
+        @stations = Station.where(:status => 0).where(:is_del => 0).order(:id => 'desc')
+      else
+        @stations = Station.where(:status => 0).where(:is_del => 0).where(:region_id => params[:region_id]).order(:id => 'desc')
       end
-      render :json => {:status => 0, :msg => 'success', :data => {:stations=> @stations, :addresses => @arr}}
+      if @stations
+        @arr = []
+        @stations.each do |station|
+          @arr << Address.find(station.address_id)
+        end
+        render :json => {:status => 0, :msg => 'success', :data => {:stations=> @stations, :addresses => @arr}}
+      else
+        render :json => {:status => 1, :msg => '获取站点错误'}
+      end
     else
-      render :json => {:status => 1, :msg => 'fail'}
+      render :json => {:status => 1, :msg => '参数错误'}
     end
   end
+
 end

@@ -11,15 +11,19 @@ class RoleController < ApplicationController
       @roots = Role.find(params[:role_id]).services.where(:pid => 0)
       @father = []
       @roots.each do |root|
-        @services = Role.find(params[:role_id]).service.where(:pid => root.id)
+        @services = Role.find(params[:role_id]).services.where(:pid => root.id)
         child = Hash.new
+        child[:id] = root.id
         child[:root] = root.function
-        h = Hash.new
+        @ak = []
         @services.each do |service|
+          h = Hash.new
+          h[:id] = service.id
           h[:root] = service.function
           h[:url] = service.url
+          @ak << h
         end
-        child[:child] = h
+        child[:child] = @ak
         @father << child
       end
       render :json => {:status => 0, :msg => 'success', :data => {:service => @father}}
@@ -30,8 +34,8 @@ class RoleController < ApplicationController
 
   def notService
     if params[:role_id]
-      @nss = Service.where(:pid != 0)
-      @rss = Role.find(params[:role_id])
+      @nss = Service.find_by_sql("select * from services where pid!=0")
+      @rss = Role.find(params[:role_id]).services
       @arr = []
       @nss.each do |ns|
         flag = 0
@@ -44,12 +48,38 @@ class RoleController < ApplicationController
         if flag == 0
           h = Hash.new
           h[:id] = ns.id
+          h[:pid] = ns.pid
           h[:function] = ns.function
-          h[:fatcher] = Service.find(ns.pid).function
+          h[:url] = ns.url
           @arr << h
         end
       end
-      render :json => {:status => 0, :msg => 'success', :data => {:service => @arr}}
+
+      @father = []
+      @vis = []
+      @arr.each do |arr|
+        if @vis[arr[:pid]] == 1
+          next
+        end
+        @vis[arr[:pid]] = 1
+        @ak = []
+        @root = Service.find(arr[:pid])
+        child = Hash.new
+        child[:id] = @root.id
+        child[:root] = @root.function
+        @arr.each do |ab|
+          if ab[:pid] == @root.id
+            h = Hash.new
+            h[:id] = ab[:id]
+            h[:root] = ab[:function]
+            h[:url] = ab[:url]
+            @ak << h
+          end
+        end
+        child[:child] = @ak
+        @father << child
+      end
+      render :json => {:status => 0, :msg => 'success', :data => {:service => @father}}
     else
       render :json => {:status => 1, :msg => '角色参数错误'}
     end
@@ -59,7 +89,7 @@ class RoleController < ApplicationController
     if params[:role_id] && params[:service_id]
       @service = Service.find(params[:service_id])
       @father = Service.find(@service.pid)
-      if Role.find(params[:role_id]).service.where(:id => @service.pid) == nil
+      if Role.find(params[:role_id]).services.where(:id => @service.pid) == []
         @rs = RoleServiceship.new
         @rs.role_id = params[:role_id]
         @rs.service_id = @service.pid
@@ -78,5 +108,13 @@ class RoleController < ApplicationController
     end
   end
 
+  def deleteService
+    if params[:service_id] && params[:role_id]
+      ActiveRecord::Base.connection.execute 'delete from role_serviceships where service_id=' + params[:service_id] + ' and role_id=' + params[:role_id]
+      render :json => {:status => 0, :msg => 'success'}
+    else
+      render :json => {:status => 1, :msg => '角色参数错误'}
+    end
+  end
 
 end

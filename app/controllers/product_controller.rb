@@ -6,13 +6,13 @@ class ProductController < ApplicationController
       uploaded_io = params[:logo]
       Image.upload(params[:logo].tempfile.path, uploaded_io.original_filename)
       @logo = 'http://oo8xw7yv4.bkt.clouddn.com/' + uploaded_io.original_filename
-      if @product.update_attributes(:name => params[:name], :logo => @logo, :price => params[:price])
+      if @product.update_attributes(:name => params[:name], :logo => @logo)
         render :json => {:status => 0, :msg => 'success'}
       else
         render :json => {:status => 1, :msg => 'fail'}
       end
     else
-      if @product.update_attributes(:name => params[:name], :price => params[:price])
+      if @product.update_attributes(:name => params[:name])
         render :json => {:status => 0, :msg => 'success'}
       else
         render :json => {:status => 1, :msg => 'fail'}
@@ -46,7 +46,7 @@ class ProductController < ApplicationController
     end
   end
 
-  def addProduct
+    def addProduct
     @category = Category.find(params[:category_id])
     @product = Product.new
     @product.name = params[:name]

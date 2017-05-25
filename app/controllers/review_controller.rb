@@ -23,8 +23,12 @@ class ReviewController < ApplicationController
   end
 
   def reviewRider
-    @riders = Rider.all.where(:status => 1)
-    if @riders
+    if params[:region_id]
+      if params[:region_id] == 1
+        @riders = Rider.all.where(:status => 1)
+      else
+        @riders = Rider.all.where(:status => 1).where(:region_id => params[:region_id])
+      end
       render :json => {:status => 0, :msg => 'success', :riders => @riders}
     else
       render :json => {:status => 1, :msg => 'fail'}

@@ -138,4 +138,7 @@ Rails.application.routes.draw do
 
   match '/role/add' => 'role#addService', :via => [:get, :post]
 
+  match '/admin/single' => 'admin#singleAdmin', :via => [:get, :post]
+
+  match '/role/service/delete' => 'role#deleteService', :via => [:get, :post]
 end
