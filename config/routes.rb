@@ -141,4 +141,7 @@ Rails.application.routes.draw do
   match '/admin/single' => 'admin#singleAdmin', :via => [:get, :post]
 
   match '/role/service/delete' => 'role#deleteService', :via => [:get, :post]
+
+  #final final
+  match '/region/province' => 'region#getFirstReginos', :via => [:get, :post]
 end
