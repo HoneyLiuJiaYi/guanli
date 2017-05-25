@@ -144,4 +144,10 @@ Rails.application.routes.draw do
 
   #final final
   match '/region/province' => 'region#getFirstReginos', :via => [:get, :post]
+
+  match '/advertisement/add' => 'advertisement#addAd', :via => [:get, :post]
+
+  match '/advertisement/product' => 'advertisement#allProduct', :via => [:get, :post]
+
+  match '/advertisement/push' => 'advertisement#push', :via => [:get, :post]
 end

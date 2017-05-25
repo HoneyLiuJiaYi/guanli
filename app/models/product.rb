@@ -5,4 +5,6 @@ class Product < ApplicationRecord
 
   has_many :prices
   has_many :items
+
+  has_many :advertisements
 end
