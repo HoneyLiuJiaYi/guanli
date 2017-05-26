@@ -2,13 +2,14 @@ class AdvertisementController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def addAd
-    if params[:product_id] && params[:logo]
+    if params[:product_id] && params[:logo] && params[:name]
       @ad = Advertisement.new
       uploaded_io = params[:logo]
       Image.upload(params[:logo].tempfile.path, uploaded_io.original_filename)
       @ad.ad_logo = 'http://oo8xw7yv4.bkt.clouddn.com/' + uploaded_io.original_filename
       @ad.product_id = params[:product_id]
       @ad.product_name = Product.find(params[:product_id]).name
+      @ad.name = params[:name]
       if @ad.save
         render :json => {:status => 0, :msg => 'success'}
       else
@@ -69,4 +70,27 @@ class AdvertisementController < ApplicationController
       render :json => {:status => 1, :msg => '参数错误'}
     end
   end
+
+    def adList
+    if params[:product_id]
+      if params[:product_id].to_i == 0
+        @ads = Advertisement.all
+      else
+        @ads = Advertisement.where(:product => params[:product_id])
+      end
+      render :json => {:status => 0, :msg => 'success', :data => {:ad => @ads}}
+    else
+      render :json => {:status => 1, :msg => '参数错误'}
+    end
+  end
+
+    def delAd
+    if params[:id]
+      ActiveRecord::Base.connection.execute 'delete from advertisements where id=' + params[:id]
+      render :json => {:status => 0, :msg => 'success'}
+    else
+      render :json => {:status => 1, :msg => '参数错误'}
+    end
+  end
+
 end
