@@ -1,11 +1,14 @@
 class UserController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  
   def list
-    @users = User.all
-    if @users
-      render :json => {:status => 0, :msg => 'success', :data => {:users => @users}}
+    if params[:search] && params[:page]
+      start = (params[:page].to_i - 1) * 3
+      @users = User.find_by_sql("select * from users where name like '%#{params[:search]}%' limit #{start},3")
+    @count = User.count/3 + 1
+    render :json => {:status => 0, :msg => 'success', :data => {:users => @users, :count => @count, :page => params[:page], :search => params[:search]}}
     else
-      render :json => {:status => 1, :msg => 'fail'}
+      render :json => {:status => 1, :msg => '参数错误'}
     end
   end
 

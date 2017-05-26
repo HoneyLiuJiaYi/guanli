@@ -78,4 +78,29 @@ class CouponController < ApplicationController
       render :json => {:status => 1, :msg => 'fail'}
     end
   end
+
+  def del
+    if params[:id]
+      ActiveRecord::Base.connection.execute 'delete from coupons where id=' + params[:id]
+      render :json => {:status => 0, :msg => 'success'}
+    else
+      render :json => {:status => 1, :msg => '参数问题'}
+    end
+  end
+
+  def pushAllUser
+    if params[:id]
+      @users = User.where(:is_del => 0)
+      @users.each do |user|
+        @uc = UserCouponship.new
+        @uc.user = User.find(user.id)
+        @uc.coupon = Coupon.find(params[:id])
+        @uc.save
+      end
+      render :json => {:status => 0, :msg => 'success'}
+    else
+      render :json => {:status => 1, :msg => '参数问题'}
+    end
+  end
+
 end

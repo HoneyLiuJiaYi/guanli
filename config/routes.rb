@@ -154,4 +154,8 @@ Rails.application.routes.draw do
   match '/advertisement/list' => 'advertisement#adList', :via => [:get, :post]
 
   match '/advertisement/del' => 'advertisement#delAd', :via => [:get, :post]
+
+  match '/coupon/del' => 'coupon#del', :via => [:get, :post]
+
+  match '/coupon/push/all' => 'coupon#pushAllUser', :via => [:get, :post]
 end
