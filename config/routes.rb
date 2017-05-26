@@ -158,4 +158,8 @@ Rails.application.routes.draw do
   match '/coupon/del' => 'coupon#del', :via => [:get, :post]
 
   match '/coupon/push/all' => 'coupon#pushAllUser', :via => [:get, :post]
+
+  match '/suggest/price' => 'manage#showSuggestPrice', :via => [:get, :post]
+
+  match '/post/suggest/price' => 'manage#manageSuggestPrice', :via => [:get, :post]
 end

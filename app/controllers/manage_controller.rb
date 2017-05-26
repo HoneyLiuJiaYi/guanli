@@ -78,4 +78,31 @@ class ManageController < ApplicationController
       render :json => {:status => 1, :msg => 'fail'}
     end
   end
+
+  def showSuggestPrice
+    @sp = SuggestPriceship.all
+    if @sp
+      render :json => {:status => 0, :msg => 'success', :data => {:suggest => @sp}}
+    else
+      render :json => {:status => 1, :msg => 'fail'}
+    end
+  end
+
+  def manageSuggestPrice
+    if params[:id] && params[:price]
+      @sp = SuggestPriceship.find(params[:id])
+      @mp = MerchantProductship.new
+      @mp.merchant_id = @sp.merchant_id
+      @mp.product_id = @sp.merchant_id
+      @mp.price = params[:price]
+      if @mp.save
+        ActiveRecord::Base.connection.execute 'delete from suggest_priceships where id=' + params[:id]
+        render :json => {:status => 0, :msg => 'success'}
+      else
+        render :json => {:status => 1, :msg => '保存失败'}
+      end
+    else
+      render :json => {:status => 1, :msg => '参数错误'}
+    end
+  end
 end
